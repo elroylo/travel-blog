@@ -25,16 +25,22 @@ export default function SpecificUsersPage() {
     return (
         <div>
             <div>
-                <h1>
-                    {user.uid}: {user.distance}
+                <h1 className='p-3 space-x-4'>
+
+                    <span className='font-bold text-xl'>
+                        {user.uid}:
+                    </span>
+                    <span className='font-medium text-xl'>
+                        {user.distance} miles
+                    </span>
                 </h1>
             </div>
-            <div>
-                {user.runs.map((values, index) => {
-                    <div>
-A {values.distance} mile travel from {values.start_loc} to {values.end_loc}
+            <div className='p-3 space-y-3'>
+                {user.runs.map((v, i) => (
+                    <div key={i}>
+A {v.distance} mile travel from {v.start_loc} to {v.end_loc}
                     </div>
-                })}
+                ))}
             </div>
         </div>
     )

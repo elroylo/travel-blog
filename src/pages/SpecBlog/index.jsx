@@ -45,7 +45,7 @@ export default function SpecificBlogPage() {
     <div key={bid}>
      <img
                     src={blogs.cover}
-                    className='w-3/5 justify-center items-center m-auto mt-4 rounded-lg'
+                    className='w-3/5 justify-center items-center m-auto mt-8 rounded-lg'
                 />
                 <div className='p-2 m-auto justify-center items-center text-center'>
                     <div className='text-4xl font-bold'>
