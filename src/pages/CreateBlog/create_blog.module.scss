@@ -1,0 +1,20 @@
+.group {
+    @apply flex flex-col p-2;
+}
+
+.group input[type='text'] {
+    @apply px-5 outline-none py-3 border border-gray-600 rounded-lg;
+}
+
+.group input[type='file'] {
+    @apply px-5 outline-none py-3 rounded-lg hover:bg-gray-200;
+}
+
+
+.group label {
+    @apply font-semibold text-lg flex capitalize;
+}
+
+.submit {
+    @apply px-4 py-2 rounded-md bg-blue-400
+}

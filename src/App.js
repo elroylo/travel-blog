@@ -1,25 +1,35 @@
-import logo from './logo.svg';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import './App.css';
+import Navbar from './components/Navbar';
+import HomePage from './pages/Home'
+import BlogPage from './pages/Blog'
+import SpecificBlogPage from './pages/SpecBlog'
+import CreateBlogPage from './pages/CreateBlog'
+import ParksMap from './pages/Parks';
+import ProfilePage from './pages/Profile/Profile';
+import NFTPage from './pages/NFT';
+import MainMapPage from './pages/MainMap';
+import LogDistancePage from './pages/LogDistance'
+import LeaderboardPage from './pages/Leaderboard'
 
-function App() {
+export default function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<HomePage />} exact />
+        <Route path="/blog/view" element={<BlogPage />} exact />
+        <Route path="/blogs/:bid" element={<SpecificBlogPage />} />
+        <Route path="/blog/create" element={<CreateBlogPage />} exact />
+        <Route path="/maps" element={<MainMapPage /> } exact />
+        <Route path="/maps/log" element={<LogDistancePage />} exact />
+        <Route path="/maps/leaderboard" element={<LeaderboardPage />} exact />
+        <Route path="/nft" element={<NFTPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/parks" element={<ParksMap />} />
+      </Routes>
+    </Router>
   );
 }
 
-export default App;
