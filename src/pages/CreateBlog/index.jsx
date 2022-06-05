@@ -52,11 +52,13 @@ export default function CreateBlogPage() {
                     //     method: 'POST',
                     //     headers
                     // })
-                    var myHeaders = new Headers();
+                    let PublicKey = "BC1YLgnBLqAtcZxNhOrWewTe9w25BaLpXQFAGtqpvcowDEGCUBnsffB";
+                    let JWT = "eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NTQ0MTE5OTEsImV4cCI6MTY1NDQxMjU5MX0.I01LQjCO0DdbAqO0M_p0ZaQmuF4AsPAflp7_YWvR5uukQkuo55yWhihF7-sfU4kl0kLUCVVrBaDQhYF742kqMQ.eyJpYXQiOjE2NTQOMTEOMzkslmV4CCI6MTY1NDQxMjAzOX0.8t|ZPC218CHIgNxKTtx8jimmi3wOfVUSSDDr2KsKahwJulSdsSLYRKSxGolxbCmlo_LvJNICOPRNeTfPcg";
 
+                    var myHeaders = new Headers();
                     var formdata = new FormData();
-                    formdata.append("UserPublicKeyBase58Check", "BC1YLgCpXwXsWQDwaXdodrRSgHrQaj5YUbfED13Syk2BCXNCQkrYzr2");
-                    formdata.append("JWT", "eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NTQ0MDk3MDMsImV4cCI6MTY1NDQxMDMwM30.Fh0qwYFi9t_rkgNTReJ6ynXC3DwPzdX8iEPU11704bOPxCK362tWQdsWwe2vU9qBpOt5_TPLQOSaFQn0QiAz6Q");
+                    formdata.append("UserPublicKeyBase58Check", PublicKey);
+                    formdata.append("JWT", JWT);
                     formdata.append("file", cover, "[PROXY]");
 
                     var requestOptions = {

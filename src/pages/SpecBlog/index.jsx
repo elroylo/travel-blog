@@ -2,6 +2,7 @@ import React, { useEffect , useState} from 'react'
 import { useParams } from 'react-router-dom'
 import { comments } from '../../constants/comments'
 import { useMoralis } from 'react-moralis'
+import style from './SpecBlog.module.css'
 
 export default function SpecificBlogPage() {
 
@@ -49,20 +50,22 @@ export default function SpecificBlogPage() {
                 <div className='p-2 m-auto justify-center items-center text-center'>
                     <div className='text-4xl font-bold'>
                         {blogs.title}
-                    </div>
+        </div>
                     {/* <div className='text-2xl font-medium'>
                         by {blogs.uid}
                     </div> */}
                 </div>
-                <div dangerouslyInsetInnerHtml={{__html: blogs.content}} />
-      <div >
+
+      <div className={style.comments}>
+      <div dangerouslySetInnerHTML={{__html: blogs.content}} />
         <div>
           {blogs.comments.map((values, index) => {
             return (
-              <div className={`comments-${index}`}>
+              <div key={`comment-${index}`} className='p-3 rounded-lg shadow-md'>
                 <h1>
-                  {values.uid}
+                  By User: {values.uid}
                 </h1>
+                <br></br>
                 <div>
                   {values.content}
                 </div>
@@ -71,12 +74,12 @@ export default function SpecificBlogPage() {
           })}
         </div>
         <div>
+        <br></br>
           <input
             placeholder='Write your comment'
             value={cContent}
             onChange={e => setCContent(e.target.value)}
           />
-
 
           <button onClick={comment}>
             Submit your comment

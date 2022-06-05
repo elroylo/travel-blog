@@ -12,16 +12,16 @@ export default function LeaderboardPage() {
     }, [])
 
     return (
-        <div>
+        <div className='m-4'>
             {leaderboard.map((values, index) => {
                 return (
-                    <Link className='p-2 rounded-md  shadow-md' to={`/users/${values.uid}`}>
-                        <div>
-                            <p>
-                                {values.uid}
-                            </p>:
-                            <p>
-                                {parseFloat(values.distance).toFixed(2)}
+                    <Link to={`/users/${values.uid}`} key={`leader_user-${index}`}>
+                        <div className='border border-gray-500 hover:bg-gray-100 hover:border-2 hover:border-black p-2 rounded-md  shadow-md'>
+                            <p className='font-bold text-xl'>
+                                ({index + 1}) User {values.uid}:
+                            </p>
+                            <p className='font-medium text-lg'>
+                                {parseFloat(values.distance).toFixed(2)} miles
                             </p>
                         </div>
                     </Link>

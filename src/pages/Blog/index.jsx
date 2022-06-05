@@ -15,7 +15,7 @@ function BlogPage() {
 
     return (
       <div className='m-4 space-y-3'>
-        {JSON.stringify(blog)}
+        
         {blog.map((values, index) => {
           return (
             <PostComponent

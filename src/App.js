@@ -31,7 +31,7 @@ export default function App() {
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/parks" element={<ParksMap />} />
         <Route path="/users" element={<UsersPage />} />
-        <Route path="/users/:id" element={<SpecificUsersPage />} />
+        <Route path="/users/:uid" element={<SpecificUsersPage />} />
       </Routes>
     </Router>
   );
