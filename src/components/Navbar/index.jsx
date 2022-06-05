@@ -19,15 +19,22 @@ export default function Navbar() {
               <Link to='/blog/view' className='hover:text-green-700 hover:font-bold hover:px-3'>
                 Blogs
               </Link> <t> </t>
+
               <Link to='/parks' className='hover:text-green-700 hover:font-bold hover:px-3'>
                 Parks
               </Link> <t> </t>
+
               <Link to='/nft' className='hover:text-green-700 hover:font-bold hover:px-3'>
                 NFTs
               </Link> <t> </t>
+
               <Link to='/blog/create' className='hover:text-green-700 hover:font-bold hover:px-3'>
                 Create a Blog
-              </Link>
+              </Link><t> </t>
+
+              <Link to='/maps' className='hover:text-green-700 hover:font-bold hover:px-3'>
+                Maps
+              </Link> <t></t>
             </li>
           </ul>
 

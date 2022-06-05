@@ -1,12 +1,13 @@
 import {IconButton, Input, SkeletonText, Text, Box, Button, ButtonGroup, Flex, HStack} from '@chakra-ui/react'
 import { FaLocationArrow, FaTimes } from 'react-icons/fa'
-
+import { useMoralis } from 'react-moralis'
 import { Autocomplete, DirectionsRenderer, useJsApiLoader, GoogleMap, Marker} from '@react-google-maps/api'
 import { useRef, useState } from 'react'
 
 const center = { lat: 48, lng: 2}
 const key = "AIzaSyAbY81ItqkCPcfaoSAmzFG8I2ZFWjE5J9s"
 function MainMapPage() {
+  const { user } = useMoralis()
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: key,
     libraries: ['places'],
@@ -16,6 +17,10 @@ function MainMapPage() {
   const [directionsResponse, setDirectionsResponse] = useState(null)
   const [distance, setDistance] = useState('')
   const [duration, setDuration] = useState('')
+  const [matrix, setMatrix] = useState({
+    duration: 0,
+distance: 0
+  })
   let [locations, setLocation] = useState({
     unit: 'u',
     distance: '',
@@ -32,6 +37,27 @@ function MainMapPage() {
     return <SkeletonText />
   }
 
+  function endTravel() {
+    let origin = originRef.current.value
+    let destination = destiantionRef.current.value
+    let { duration, distance } = matrix
+    let uid = user.get('ethAddress')
+    let body = JSON.stringify({
+      unit: 'u',
+      distance: distance,
+      uid,
+      start_loc: origin,
+      end_loc: destination
+    })
+    let headers = new Headers()
+    headers.append('Content-Type', 'application/json')
+    fetch(`https://travel-blog.epiccodewizard2.repl.co/users/log`, {
+      body,
+      method: "POST",
+      headers
+    })
+  }
+
   async function calculateRoute() {
     if (originRef.current.value === '' || destiantionRef.current.value === '') {
       return
@@ -42,11 +68,15 @@ function MainMapPage() {
       origin: originRef.current.value,
       destination: destiantionRef.current.value,
       // eslint-disable-next-line no-undef
-      travelMode: google.maps.TravelMode.DRIVING,
+      travelMode: google.maps.TravelMode.WALKING,
     })
     setDirectionsResponse(results)
     setDistance(results.routes[0].legs[0].distance.text)
     setDuration(results.routes[0].legs[0].duration.text)
+    setMatrix({
+      duration: results.routes[0].legs[0].duration.value,
+      distance: results.routes[0].legs[0].distance.value
+    })
   }
 
   function clearRoute() {
@@ -114,6 +144,8 @@ function MainMapPage() {
           <ButtonGroup>
             <Button colorScheme='pink' type='submit' onClick={calculateRoute}>
               Calculate Route
+            </Button><Button colorScheme='blue' type='submit' onClick={endTravel}>
+              End Travel
             </Button>
             <IconButton
               aria-label='center back'

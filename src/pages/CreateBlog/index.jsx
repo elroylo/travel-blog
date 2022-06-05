@@ -39,6 +39,33 @@ export default function CreateBlogPage() {
         >
             {({ handleSubmit, handleChange, onSubmit, values }) => {
                 async function submit() {
+                    // let uid = user.get('ethAddress')
+                    // let headers = new Headers()
+                    // headers.append('Content-Type', 'application/x-www-form-urlencoded')
+                    // let formBody = new FormData()
+                    // formBody.append("cover", cover)
+                    // formBody.append("content", values.content)
+                    // formBody.append("title", values.title)
+                    // formBody.append("uid", uid)
+                    // await fetch('https://travel-blog.epiccodewizard2.repl.co/blogs/add', {
+                    //     body: formBody,
+                    //     method: 'POST',
+                    //     headers
+                    // })
+                    var myHeaders = new Headers();
+
+                    var formdata = new FormData();
+                    formdata.append("UserPublicKeyBase58Check", "BC1YLgCpXwXsWQDwaXdodrRSgHrQaj5YUbfED13Syk2BCXNCQkrYzr2");
+                    formdata.append("JWT", "eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NTQ0MDk3MDMsImV4cCI6MTY1NDQxMDMwM30.Fh0qwYFi9t_rkgNTReJ6ynXC3DwPzdX8iEPU11704bOPxCK362tWQdsWwe2vU9qBpOt5_TPLQOSaFQn0QiAz6Q");
+                    formdata.append("file", cover, "[PROXY]");
+
+                    var requestOptions = {
+                    method: 'POST',
+                    headers: myHeaders,
+                    body: formdata,
+                    redirect: 'follow'
+                    };
+
                     let uid = user.get('ethAddress')
                     let coverImg = new Moralis.File(cover.name, cover)
                     await coverImg.saveIPFS()
@@ -46,7 +73,7 @@ export default function CreateBlogPage() {
                     let headers = new Headers()
                     headers.append('Content-Type', 'application/json')
                     let body = JSON.stringify({
-                        cover: coverURL,
+                        cover: await fetch("https://node.deso.org/api/v0/upload-image", requestOptions).then(response => response.text()),
                         content: values.content,
                         title: values.title,
                         uid

@@ -11,6 +11,8 @@ import NFTPage from './pages/NFT';
 import MainMapPage from './pages/MainMap';
 import LogDistancePage from './pages/LogDistance'
 import LeaderboardPage from './pages/Leaderboard'
+import UsersPage from './pages/Users'
+import SpecificUsersPage from './pages/SpecUsers';
 
 export default function App() {
 
@@ -24,10 +26,12 @@ export default function App() {
         <Route path="/blog/create" element={<CreateBlogPage />} exact />
         <Route path="/maps" element={<MainMapPage /> } exact />
         <Route path="/maps/log" element={<LogDistancePage />} exact />
-        <Route path="/maps/leaderboard" element={<LeaderboardPage />} exact />
+        <Route path="/leaderboard" element={<LeaderboardPage />} exact />
         <Route path="/nft" element={<NFTPage />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/parks" element={<ParksMap />} />
+        <Route path="/users" element={<UsersPage />} />
+        <Route path="/users/:id" element={<SpecificUsersPage />} />
       </Routes>
     </Router>
   );

@@ -18,25 +18,24 @@ export default function SpecificBlogPage() {
   let { bid } = useParams()
   let [cContent, setCContent] = useState('')
 
-  // function comment() {
-  //   let uid = user.get('ethAddress')
-  //   let body = JSON.stringify({
-  //     bid,
-  //     uid,
-  //     content: cContent
-  //   })
-  //   let headers = new Headers()
-  //   headers.append('Content-Type', 'application/json')
-  //   fetch(`blog.epiccodewizard2.repl.co/blogs/comments/${bid}`,
-
-  //     headers,
-  //     body,
-  //     method: 'POST'
-  //   })
-  // }
+  function comment() {
+    let uid = user.get('ethAddress')
+    let body = JSON.stringify({
+      bid,
+      uid,
+      content: cContent
+    })
+    let headers = new Headers()
+    headers.append('Content-Type', 'application/json')
+    fetch(`https://travel-blog.epiccodewizard2.repl.co/blogs/comments/${bid}`,{
+      headers,
+      body,
+      method: 'POST'
+    })
+  }
 
   useEffect(() => {
-    fetch(`https://travel-blog.epiccodewizard2.repl.co/blog/get/${bid}`)
+    fetch(`https://travel-blog.epiccodewizard2.repl.co/blogs/get/${bid}`)
       .then(res => res.json())
       .then(blog => setBlog(blog))
   }, [])
@@ -51,37 +50,22 @@ export default function SpecificBlogPage() {
                     <div className='text-4xl font-bold'>
                         {blogs.title}
                     </div>
-                    <div className='text-2xl font-medium'>
+                    {/* <div className='text-2xl font-medium'>
                         by {blogs.uid}
-                    </div>
+                    </div> */}
                 </div>
-                <div>
-                    {blogs.content}
-                </div>
-      <div>
-        <div>
-
-      </div>
-      <div className='flex-col py-4'>
-            <div className='flex p-2 my-2'>
-                <p className='text-lg font-semibold'>
-                    {uid}
-                </p>
-            </div>
-            <div className='text-truncate'>
-                {content}
-            </div>
-        </div>
+                <div dangerouslyInsetInnerHtml={{__html: blogs.content}} />
+      <div >
         <div>
           {blogs.comments.map((values, index) => {
             return (
-              <div key={`comments-${index}`}>
+              <div className={`comments-${index}`}>
                 <h1>
                   {values.uid}
                 </h1>
-                <duv>
+                <div>
                   {values.content}
-                </duv>
+                </div>
               </div>
             )
           })}
@@ -92,6 +76,12 @@ export default function SpecificBlogPage() {
             value={cContent}
             onChange={e => setCContent(e.target.value)}
           />
+
+
+          <button onClick={comment}>
+            Submit your comment
+          </button>
+
         </div>
       </div>
     </div>
