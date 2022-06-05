@@ -1,19 +1,42 @@
 import React, { useEffect , useState} from 'react'
 import { useParams } from 'react-router-dom'
+import { comments } from '../../constants/comments'
+import { useMoralis } from 'react-moralis'
 
-function SpecificBlogPage() {
+export default function SpecificBlogPage() {
+
+  let { user } = useMoralis()
 
   let [blogs, setBlog] = useState({
     cover: '',
     content: '',
     title: '',
     uid: '',
-    bid: ''
+    bid: '',
+    comments
   })
   let { bid } = useParams()
+  let [cContent, setCContent] = useState('')
+
+  // function comment() {
+  //   let uid = user.get('ethAddress')
+  //   let body = JSON.stringify({
+  //     bid,
+  //     uid,
+  //     content: cContent
+  //   })
+  //   let headers = new Headers()
+  //   headers.append('Content-Type', 'application/json')
+  //   fetch(`blog.epiccodewizard2.repl.co/blogs/comments/${bid}`,
+
+  //     headers,
+  //     body,
+  //     method: 'POST'
+  //   })
+  // }
 
   useEffect(() => {
-    fetch(`/blog?id=${bid}`)
+    fetch(`https://travel-blog.epiccodewizard2.repl.co/blog/get/${bid}`)
       .then(res => res.json())
       .then(blog => setBlog(blog))
   }, [])
@@ -35,8 +58,42 @@ function SpecificBlogPage() {
                 <div>
                     {blogs.content}
                 </div>
+      <div>
+        <div>
+
+      </div>
+      <div className='flex-col py-4'>
+            <div className='flex p-2 my-2'>
+                <p className='text-lg font-semibold'>
+                    {uid}
+                </p>
+            </div>
+            <div className='text-truncate'>
+                {content}
+            </div>
+        </div>
+        <div>
+          {blogs.comments.map((values, index) => {
+            return (
+              <div key={`comments-${index}`}>
+                <h1>
+                  {values.uid}
+                </h1>
+                <duv>
+                  {values.content}
+                </duv>
+              </div>
+            )
+          })}
+        </div>
+        <div>
+          <input
+            placeholder='Write your comment'
+            value={cContent}
+            onChange={e => setCContent(e.target.value)}
+          />
+        </div>
+      </div>
     </div>
   )
 }
-
-export default SpecificBlogPage

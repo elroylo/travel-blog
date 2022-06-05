@@ -6,6 +6,10 @@
     @apply px-5 outline-none py-3 border border-gray-600 rounded-lg;
 }
 
+.group textarea {
+    @apply px-5 outline-none py-3 border border-gray-600 rounded-lg;
+}
+
 .group input[type='file'] {
     @apply px-5 outline-none py-3 rounded-lg hover:bg-gray-200;
 }

@@ -53,9 +53,10 @@ export default function CreateBlogPage() {
                     })
                     console.log(body)
                     console.log(headers.get('Content-Type'))
-                    await fetch('', {
+                    await fetch('https://travel-blog.epiccodewizard2.repl.co/blogs/add', {
                         body,
-                        method: 'POST'
+                        method: 'POST',
+                        headers
                     })
                 }
                 return (
@@ -81,7 +82,7 @@ export default function CreateBlogPage() {
                             <label htmlFor='content'>
                                 Content:
                             </label>
-                            <input
+                            <textarea
                                 type='text'
                                 onChange={handleChange}
                                 name='content'

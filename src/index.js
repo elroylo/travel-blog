@@ -5,11 +5,14 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { MoralisProvider } from 'react-moralis';
 import { APP_ID, SERVER_URL } from './constants/moralis'
+import { ChakraProvider } from '@chakra-ui/react'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <MoralisProvider appId={APP_ID} serverUrl={SERVER_URL}>
-    <App />
+    <ChakraProvider>
+      <App />
+    </ChakraProvider>
   </MoralisProvider>
 );
 
